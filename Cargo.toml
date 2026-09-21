@@ -1,0 +1,29 @@
+[package]
+name = "tantivy-markdown-mcp"
+version = "0.1.0"
+edition = "2024"
+license = "MIT"
+description = "A local MCP server that indexes Markdown files and provides BM25 keyword search with Tantivy."
+repository = "https://github.com/vdmk/tantivy-markdown-mcp"
+readme = "README.md"
+keywords = ["mcp", "markdown", "search", "tantivy"]
+categories = ["command-line-utilities", "development-tools"]
+
+[[bin]]
+name = "tantivy-markdown-mcp"
+path = "src/main.rs"
+
+[dev-dependencies]
+tempfile = "3"
+
+[dependencies]
+tantivy = "0.26"
+clap = { version = "4", features = ["derive"] }
+notify-debouncer-mini = "0.7"
+serde_json = "1"
+walkdir = "2"
+anyhow = "1"
+home = "0.5"
+fs4 = "0.13"
+libc = "0.2"
+sha2 = "0.10"

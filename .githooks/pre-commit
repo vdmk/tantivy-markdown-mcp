@@ -1,0 +1,15 @@
+#!/bin/sh
+
+set -eu
+
+repository_root=$(git rev-parse --show-toplevel)
+cd "$repository_root"
+
+echo "Running rustfmt..."
+cargo fmt --all -- --check
+
+echo "Running Clippy..."
+cargo clippy --all-targets --all-features -- -D warnings
+
+echo "Running tests..."
+cargo test --all-targets

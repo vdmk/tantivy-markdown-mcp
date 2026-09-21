@@ -1,0 +1,28 @@
+[
+  {
+    "name": "search",
+    "description": "BM25 keyword search over indexed markdown files. Use specific, rare terms that appear in the documents — avoid common/generic words that dilute ranking. Quote phrases for exact matching (e.g. \"decision model\"). Semantic/conceptual queries won't work well; prefer precise terminology. Returns ranked results with file paths and surrounding snippets. Use the path with your Read tool to view the relevant section.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "BM25 search query. Prefer specific, rare terms; quote phrases for exact match: \"DMN notation\""
+        },
+        "limit": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000,
+          "description": "Max results to return (default 5)"
+        },
+        "snippet_size": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10000,
+          "description": "Max characters in the snippet around the match (default 500)"
+        }
+      },
+      "required": ["query"]
+    }
+  }
+]

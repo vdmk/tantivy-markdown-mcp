@@ -1,0 +1,23 @@
+# Rust build artifacts
+/target/
+
+# macOS
+.DS_Store
+
+# IntelliJ IDEA
+.idea/
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+
+# Coverage/profiling output
+*.profraw
+*.profdata
+/coverage/
+
+# Editor temporary files
+*.swp
+*.swo
+*~
