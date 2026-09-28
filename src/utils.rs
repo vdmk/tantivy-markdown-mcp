@@ -2,7 +2,7 @@ use std::fs::{File, OpenOptions};
 use std::path::{Path, PathBuf};
 
 use anyhow::{Context, Result};
-use fs4::fs_std::FileExt;
+use fs4::{FileExt, TryLockError};
 use sha2::{Digest, Sha256};
 
 const MAX_INDEX_DIR_NAME_BYTES: usize = 240;
@@ -29,8 +29,14 @@ pub fn data_lock(shared: bool) -> Result<File> {
 
     if shared {
         lock.lock_shared()?;
-    } else if !lock.try_lock_exclusive()? {
-        anyhow::bail!("tantivy-markdown-mcp is currently running");
+    } else {
+        match FileExt::try_lock(&lock) {
+            Ok(()) => {}
+            Err(TryLockError::WouldBlock) => {
+                anyhow::bail!("tantivy-markdown-mcp is currently running")
+            }
+            Err(error) => return Err(error.into()),
+        }
     }
     Ok(lock)
 }
