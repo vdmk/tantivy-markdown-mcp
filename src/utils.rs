@@ -53,7 +53,7 @@ pub fn data_home(xdg_data_home: Option<std::ffi::OsString>) -> Result<PathBuf> {
 fn index_dir_name(watch_path: &Path) -> String {
     let root = watch_path.to_string_lossy();
     let hash = Sha256::digest(root.as_bytes());
-    let suffix = format!("-{hash:x}");
+    let suffix = format!("-{}", hex::encode(hash));
     let readable = root.replace('/', "_");
     let readable_limit = MAX_INDEX_DIR_NAME_BYTES - suffix.len();
     format!("{}{suffix}", truncate_to_bytes(&readable, readable_limit))
