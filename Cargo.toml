@@ -1,6 +1,6 @@
 [package]
 name = "tantivy-markdown-mcp"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2024"
 license = "MIT"
 description = "A local MCP server that indexes Markdown files and provides BM25 keyword search with Tantivy."
